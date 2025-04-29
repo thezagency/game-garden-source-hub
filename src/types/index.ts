@@ -16,4 +16,4 @@ export interface Game {
   playUrl: string;
 }
 
-export type GameCategory = 'puzzle' | 'arcade' | 'strategy' | 'action' | 'all';
+export type GameCategory = 'puzzle' | 'arcade' | 'strategy' | 'action' | 'racing' | 'sports' | 'educational' | 'all';

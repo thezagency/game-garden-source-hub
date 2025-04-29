@@ -128,13 +128,13 @@ const GameDetail = () => {
                 </div>
                 
                 <div>
-                  <a 
-                    href={game.playUrl} 
+                  <Link 
+                    to={`/play/${game.id}`} 
                     className="btn-game flex items-center justify-center"
                   >
                     <Play className="mr-2 h-5 w-5" />
                     Play Game
-                  </a>
+                  </Link>
                 </div>
               </div>
               

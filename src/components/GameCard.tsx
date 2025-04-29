@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { Game } from "../types";
-import { Trophy, Star } from "lucide-react";
+import { Trophy, Play } from "lucide-react";
 
 interface GameCardProps {
   game: Game;
@@ -59,12 +59,13 @@ const GameCard = ({ game }: GameCardProps) => {
           >
             View Code
           </Link>
-          <a 
-            href={game.playUrl}
-            className="btn-game text-xs px-3 py-2 flex-1 text-center"
+          <Link 
+            to={`/play/${game.id}`}
+            className="btn-game text-xs px-3 py-2 flex-1 text-center flex items-center justify-center"
           >
-            Play Game
-          </a>
+            <Play className="h-3 w-3 mr-1" />
+            Play
+          </Link>
         </div>
       </div>
     </div>
