@@ -49,6 +49,36 @@ const PlayGame = () => {
     );
   }
 
+  // Determine if the game has C# or Java code to show warning
+  const hasNonWebCode = game.sourceCode.csharp || game.sourceCode.java;
+
+  // Generate the HTML content for the iframe
+  const generateGameContent = () => {
+    // Include the appropriate code in the iframe based on game type
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${game.title}</title>
+        <style>
+          body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+          }
+          ${game.sourceCode.css || ''}
+        </style>
+      </head>
+      <body>
+        ${game.sourceCode.html || '<div id="game-container"></div>'}
+        <script>
+          ${game.sourceCode.js || game.sourceCode.ts || '// No JavaScript or TypeScript code available'}
+        </script>
+      </body>
+      </html>
+    `;
+  };
+
   return (
     <div className="min-h-screen bg-game-dark flex flex-col">
       <Navbar />
@@ -70,31 +100,21 @@ const PlayGame = () => {
             </div>
           ) : (
             <div className="game-frame p-4">
+              {hasNonWebCode && (
+                <div className="bg-amber-500/20 border border-amber-500/50 text-amber-200 p-4 mb-4 rounded-lg">
+                  <p className="font-semibold">
+                    This game is showing the JavaScript implementation of the {game.sourceCode.csharp ? 'C#' : 'Java'} code.
+                  </p>
+                  <p className="text-sm mt-2">
+                    In a production environment, the {game.sourceCode.csharp ? 'C#' : 'Java'} code would be running on the server.
+                    View the source code to see both implementations.
+                  </p>
+                </div>
+              )}
               <iframe
                 title={game.title}
-                className="w-full h-[500px] bg-white rounded-lg" 
-                srcDoc={`
-                  <!DOCTYPE html>
-                  <html>
-                  <head>
-                    <title>${game.title}</title>
-                    <style>
-                      body {
-                        margin: 0;
-                        overflow: hidden;
-                        font-family: Arial, sans-serif;
-                      }
-                      ${game.sourceCode.css || ''}
-                    </style>
-                  </head>
-                  <body>
-                    ${game.sourceCode.html || '<div id="game-container"></div>'}
-                    <script>
-                      ${game.sourceCode.js || game.sourceCode.ts || '// No JavaScript or TypeScript code available'}
-                    </script>
-                  </body>
-                  </html>
-                `}
+                className="w-full h-[500px] bg-white rounded-lg"
+                srcDoc={generateGameContent()}
                 sandbox="allow-scripts"
               ></iframe>
             </div>
