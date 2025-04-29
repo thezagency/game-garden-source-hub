@@ -10,6 +10,8 @@ export interface Game {
     css?: string; 
     js?: string;
     ts?: string;
+    csharp?: string;
+    java?: string;
   };
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   featured?: boolean;
