@@ -46,13 +46,13 @@ const FeaturedGame = ({ game }: FeaturedGameProps) => {
               View Source
             </Link>
             
-            <a
-              href={game.playUrl}
+            <Link
+              to={`/play/${game.id}`}
               className="btn-game flex items-center justify-center"
             >
               <Play className="w-5 h-5 mr-2" />
               Play Game
-            </a>
+            </Link>
           </div>
           
           <div className="mt-6">
@@ -75,6 +75,12 @@ const FeaturedGame = ({ game }: FeaturedGameProps) => {
                 )}
                 {game.sourceCode.ts && (
                   <span className="px-2 py-1 bg-blue-700/20 text-blue-300 text-xs rounded">TypeScript</span>
+                )}
+                {game.sourceCode.csharp && (
+                  <span className="px-2 py-1 bg-green-500/20 text-green-300 text-xs rounded">C#</span>
+                )}
+                {game.sourceCode.java && (
+                  <span className="px-2 py-1 bg-red-500/20 text-red-300 text-xs rounded">Java</span>
                 )}
               </div>
             </div>

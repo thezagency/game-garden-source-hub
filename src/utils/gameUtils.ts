@@ -12,7 +12,7 @@ import { Game } from "../types";
  * This makes it easy to add more games in component format
  */
 export const getComponentGames = (): Game[] => {
-  return [
+  const games = [
     getSnakeGame(),
     getTetrisGame(),
     getChessGame(),
@@ -20,4 +20,10 @@ export const getComponentGames = (): Game[] => {
     getPongGame(),
     get2048Game()
   ];
+  
+  // Ensure all games have the correct playUrl format
+  return games.map(game => ({
+    ...game,
+    playUrl: `/play/${game.id}`
+  }));
 };

@@ -17,10 +17,21 @@ const PlayGame = () => {
     // Show loading state briefly for better UX
     const timer = setTimeout(() => {
       setIsLoading(false);
+      
+      // Initialize game after loading is complete
+      if (game && !isLoading) {
+        const iframe = document.querySelector('iframe');
+        if (iframe) {
+          // Ensure the iframe is fully loaded before manipulating it
+          iframe.onload = () => {
+            console.log("Game iframe loaded successfully");
+          };
+        }
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [game, isLoading]);
 
   useEffect(() => {
     if (game) {
