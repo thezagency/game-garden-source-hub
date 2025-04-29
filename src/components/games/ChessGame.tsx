@@ -836,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     toString(): string {
-      return `${String.fromCharCode(97 + this.col)}${8 - this.row}`;
+      return String.fromCharCode(97 + this.col) + (8 - this.row);
     }
     
     equals(other: Position): boolean {
@@ -968,7 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.isGameOver) {
         statusElement.textContent = this.gameResult;
       } else {
-        statusElement.textContent = \`\${this.currentPlayer === Color.White ? 'White' : 'Black'} to move\`;
+        statusElement.textContent = (this.currentPlayer === Color.White ? 'White' : 'Black') + ' to move';
         if (this.isInCheck(this.currentPlayer)) {
           statusElement.textContent += ' (Check)';
         }
