@@ -61,32 +61,60 @@ const PlayGame = () => {
 
   // Generate the HTML content for the iframe
   function generateGameContent() {
-    // Fix for template literals in JavaScript code
-    const jsCode = game.sourceCode?.js || game.sourceCode?.ts || '// No JavaScript or TypeScript code available';
-    
-    // Create safe HTML content without template literals
-    return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>${game.title}</title>
-        <style>
-          body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-          }
-          ${game.sourceCode?.css || ''}
-        </style>
-      </head>
-      <body>
-        ${game.sourceCode?.html || '<div id="game-container"></div>'}
-        <script>
-          ${jsCode}
-        </script>
-      </body>
-      </html>
-    `;
+    try {
+      // Get the source code or provide defaults
+      const htmlCode = game.sourceCode?.html || '<div id="game-container">Game not available</div>';
+      const cssCode = game.sourceCode?.css || '';
+      const jsCode = game.sourceCode?.js || game.sourceCode?.ts || '// No JavaScript or TypeScript code available';
+      
+      // Ensure we're not using template literals in the JavaScript, as they can cause issues
+      // This modifies any template literals to use string concatenation instead
+      const safeJsCode = jsCode
+        .replace(/`/g, "'") // Replace backticks with single quotes
+        .replace(/\${([^}]*)}/g, "' + $1 + '"); // Replace ${expressions} with concatenation
+      
+      // Create safe HTML content
+      return `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${game.title}</title>
+          <style>
+            body {
+              margin: 0;
+              overflow: hidden;
+              font-family: Arial, sans-serif;
+            }
+            ${cssCode}
+          </style>
+        </head>
+        <body>
+          ${htmlCode}
+          <script>
+            try {
+              ${safeJsCode}
+            } catch(e) {
+              console.error('Game error:', e);
+              document.body.innerHTML += '<div style="color: red; padding: 20px;">Error loading game: ' + e.message + '</div>';
+            }
+          </script>
+        </body>
+        </html>
+      `;
+    } catch (error) {
+      console.error("Error generating game content:", error);
+      return `
+        <!DOCTYPE html>
+        <html>
+        <body>
+          <div style="font-family: Arial; text-align: center; padding: 50px;">
+            <h2>Game could not be loaded</h2>
+            <p>There was an error processing this game's code.</p>
+          </div>
+        </body>
+        </html>
+      `;
+    }
   }
 
   return (
@@ -121,12 +149,15 @@ const PlayGame = () => {
                   </p>
                 </div>
               )}
-              <iframe
-                title={game.title}
-                className="w-full h-[500px] bg-white rounded-lg"
-                srcDoc={iframeContent}
-                sandbox="allow-scripts"
-              ></iframe>
+              
+              <div className="sandbox-container bg-white rounded-lg overflow-hidden">
+                <iframe
+                  title={game.title}
+                  className="w-full h-[500px]"
+                  srcDoc={iframeContent}
+                  sandbox="allow-scripts"
+                ></iframe>
+              </div>
             </div>
           )}
 
