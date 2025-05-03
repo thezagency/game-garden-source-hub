@@ -110,10 +110,10 @@ const PlayGame = () => {
               {hasNonWebCode && (
                 <div className="bg-amber-500/20 border border-amber-500/50 text-amber-200 p-4 mb-4 rounded-lg">
                   <p className="font-semibold">
-                    This game is showing the JavaScript implementation of the {game.sourceCode.csharp ? 'C#' : 'Java'} code.
+                    This game is showing the JavaScript implementation of the {game.sourceCode?.csharp ? 'C#' : 'Java'} code.
                   </p>
                   <p className="text-sm mt-2">
-                    In a production environment, the {game.sourceCode.csharp ? 'C#' : 'Java'} code would be running on the server.
+                    In a production environment, the {game.sourceCode?.csharp ? 'C#' : 'Java'} code would be running on the server.
                     View the source code to see both implementations.
                   </p>
                 </div>

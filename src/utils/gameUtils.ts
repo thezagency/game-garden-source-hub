@@ -9,6 +9,7 @@ import { getMemoryCardGame } from "../components/games/MemoryCardGame";
 import { getTetrisGravityGame } from "../components/games/TetrisGravityGame";
 import { getSnakeGameAdvanced } from "../components/games/SnakeGameAdvanced";
 import { Game } from "../types";
+import { additionalGames } from "../data/additionalGames";
 
 /**
  * Helper function to get additional games created as components
@@ -28,8 +29,12 @@ export const getComponentGames = (): Game[] => {
   ];
   
   // Ensure all games have the correct playUrl format
-  return games.map(game => ({
+  const componentGames = games.map(game => ({
     ...game,
     playUrl: `/play/${game.id}`
   }));
+
+  // Merge component games with additional games from data file
+  // This will give us a large collection of games
+  return [...componentGames, ...additionalGames];
 };
