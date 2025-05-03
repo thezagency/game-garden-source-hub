@@ -61,7 +61,10 @@ const PlayGame = () => {
 
   // Generate the HTML content for the iframe
   function generateGameContent() {
-    // Include the appropriate code in the iframe based on game type
+    // Fix for template literals in JavaScript code
+    const jsCode = game.sourceCode?.js || game.sourceCode?.ts || '// No JavaScript or TypeScript code available';
+    
+    // Create safe HTML content without template literals
     return `
       <!DOCTYPE html>
       <html>
@@ -79,7 +82,7 @@ const PlayGame = () => {
       <body>
         ${game.sourceCode?.html || '<div id="game-container"></div>'}
         <script>
-          ${game.sourceCode?.js || game.sourceCode?.ts || '// No JavaScript or TypeScript code available'}
+          ${jsCode}
         </script>
       </body>
       </html>

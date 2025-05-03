@@ -10,6 +10,14 @@ import { getTetrisGravityGame } from "../components/games/TetrisGravityGame";
 import { getSnakeGameAdvanced } from "../components/games/SnakeGameAdvanced";
 import { Game } from "../types";
 import { additionalGames } from "../data/additionalGames";
+import { 
+  generateSimpleArcadeGames, 
+  generatePuzzleGames, 
+  generateStrategyGames, 
+  generateActionGames, 
+  generateRacingGames,
+  generateEducationalGames
+} from "./gameGenerators";
 
 /**
  * Helper function to get additional games created as components
@@ -34,8 +42,17 @@ export const getComponentGames = (): Game[] => {
     playUrl: `/play/${game.id}`
   }));
 
-  // Merge component games with additional games from data file
-  // This will give us a large collection of games
-  return [...componentGames, ...additionalGames];
-};
+  // Get dynamically generated games from generators
+  const dynamicGames = [
+    ...generateSimpleArcadeGames(),
+    ...generatePuzzleGames(),
+    ...generateStrategyGames(),
+    ...generateActionGames(),
+    ...generateRacingGames(),
+    ...generateEducationalGames()
+  ];
 
+  // Merge component games with additional games from data file and dynamic games
+  // This will give us a large collection of games
+  return [...componentGames, ...additionalGames, ...dynamicGames];
+};
