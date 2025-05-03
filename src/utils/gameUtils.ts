@@ -5,6 +5,9 @@ import { getChessGame } from "../components/games/ChessGame";
 import { getTowerDefenseGame } from "../components/games/TowerDefenseGame";
 import { getPongGame } from "../components/games/PongGame";
 import { get2048Game } from "../components/games/Game2048";
+import { getMemoryCardGame } from "../components/games/MemoryCardGame";
+import { getTetrisGravityGame } from "../components/games/TetrisGravityGame";
+import { getSnakeGameAdvanced } from "../components/games/SnakeGameAdvanced";
 import { Game } from "../types";
 
 /**
@@ -18,7 +21,10 @@ export const getComponentGames = (): Game[] => {
     getChessGame(),
     getTowerDefenseGame(),
     getPongGame(),
-    get2048Game()
+    get2048Game(),
+    getMemoryCardGame(),
+    getTetrisGravityGame(),
+    getSnakeGameAdvanced()
   ];
   
   // Ensure all games have the correct playUrl format

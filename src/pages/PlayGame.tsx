@@ -12,35 +12,31 @@ const PlayGame = () => {
   const game = getGameById(id || "");
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const [iframeContent, setIframeContent] = useState("");
 
   useEffect(() => {
+    // Generate the iframe content once game data is loaded
+    if (game) {
+      const content = generateGameContent();
+      setIframeContent(content);
+    }
+
     // Show loading state briefly for better UX
     const timer = setTimeout(() => {
       setIsLoading(false);
-      
-      // Initialize game after loading is complete
-      if (game && !isLoading) {
-        const iframe = document.querySelector('iframe');
-        if (iframe) {
-          // Ensure the iframe is fully loaded before manipulating it
-          iframe.onload = () => {
-            console.log("Game iframe loaded successfully");
-          };
-        }
-      }
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [game, isLoading]);
+  }, [game]);
 
   useEffect(() => {
-    if (game) {
+    if (game && !isLoading) {
       toast({
         title: `${game.title} loaded!`,
         description: "Have fun playing this game!",
       });
     }
-  }, [game, toast]);
+  }, [game, isLoading, toast]);
 
   if (!game) {
     return (
@@ -61,10 +57,10 @@ const PlayGame = () => {
   }
 
   // Determine if the game has C# or Java code to show warning
-  const hasNonWebCode = game.sourceCode.csharp || game.sourceCode.java;
+  const hasNonWebCode = game.sourceCode?.csharp || game.sourceCode?.java;
 
   // Generate the HTML content for the iframe
-  const generateGameContent = () => {
+  function generateGameContent() {
     // Include the appropriate code in the iframe based on game type
     return `
       <!DOCTYPE html>
@@ -77,18 +73,18 @@ const PlayGame = () => {
             overflow: hidden;
             font-family: Arial, sans-serif;
           }
-          ${game.sourceCode.css || ''}
+          ${game.sourceCode?.css || ''}
         </style>
       </head>
       <body>
-        ${game.sourceCode.html || '<div id="game-container"></div>'}
+        ${game.sourceCode?.html || '<div id="game-container"></div>'}
         <script>
-          ${game.sourceCode.js || game.sourceCode.ts || '// No JavaScript or TypeScript code available'}
+          ${game.sourceCode?.js || game.sourceCode?.ts || '// No JavaScript or TypeScript code available'}
         </script>
       </body>
       </html>
     `;
-  };
+  }
 
   return (
     <div className="min-h-screen bg-game-dark flex flex-col">
@@ -125,7 +121,7 @@ const PlayGame = () => {
               <iframe
                 title={game.title}
                 className="w-full h-[500px] bg-white rounded-lg"
-                srcDoc={generateGameContent()}
+                srcDoc={iframeContent}
                 sandbox="allow-scripts"
               ></iframe>
             </div>
