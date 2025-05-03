@@ -38,3 +38,4 @@ export const getComponentGames = (): Game[] => {
   // This will give us a large collection of games
   return [...componentGames, ...additionalGames];
 };
+

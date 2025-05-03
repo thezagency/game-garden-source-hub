@@ -1,3 +1,4 @@
+
 import { Game } from "../types";
 
 export const additionalGames: Game[] = [
@@ -951,7 +952,7 @@ document.addEventListener('DOMContentLoaded', () => {
         num1 = Math.floor(Math.random() * maxNum) + 1;
         num2 = Math.floor(Math.random() * maxNum) + 1;
         answer = num1 + num2;
-        questionElement.textContent = `What is ${num1} + ${num2}?`;
+        questionElement.textContent = "What is " + num1 + " + " + num2 + "?";
         break;
       
       case 'subtraction':
@@ -959,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
         num1 = Math.floor(Math.random() * maxNum) + Math.floor(maxNum/2);
         num2 = Math.floor(Math.random() * num1);
         answer = num1 - num2;
-        questionElement.textContent = `What is ${num1} - ${num2}?`;
+        questionElement.textContent = "What is " + num1 + " - " + num2 + "?";
         break;
       
       case 'multiplication':
@@ -968,7 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
         num1 = Math.floor(Math.random() * (maxNum * factor)) + 1;
         num2 = Math.floor(Math.random() * (maxNum * factor)) + 1;
         answer = num1 * num2;
-        questionElement.textContent = `What is ${num1} × ${num2}?`;
+        questionElement.textContent = "What is " + num1 + " × " + num2 + "?";
         break;
       
       case 'division':
@@ -976,7 +977,7 @@ document.addEventListener('DOMContentLoaded', () => {
         num2 = Math.floor(Math.random() * 5) + 1; // divisor
         answer = Math.floor(Math.random() * 5) + 1; // quotient
         num1 = num2 * answer; // dividend
-        questionElement.textContent = `What is ${num1} ÷ ${num2}?`;
+        questionElement.textContent = "What is " + num1 + " ÷ " + num2 + "?";
         break;
     }
     
@@ -1086,8 +1087,8 @@ document.addEventListener('DOMContentLoaded', () => {
     questionContainer.classList.add('hidden');
     resultContainer.classList.remove('hidden');
     
-    finalScoreElement.textContent = `Your score: ${score}`;
-    finalLevelElement.textContent = `You reached level: ${level}`;
+    finalScoreElement.textContent = "Your score: " + score;
+    finalLevelElement.textContent = "You reached level: " + level;
   }
 });`,
     },
@@ -1195,8 +1196,8 @@ button {
     enemies = [];
     
     // Update display
-    scoreDisplay.textContent = `Score: ${score}`;
-    livesDisplay.textContent = `Lives: ${lives}`;
+    scoreDisplay.textContent = "Score: " + score;
+    livesDisplay.textContent = "Lives: " + lives;
     
     // Create initial enemies
     createEnemyWave();
@@ -1302,7 +1303,7 @@ button {
           
           // Increase score
           score += 10;
-          scoreDisplay.textContent = `Score: ${score}`;
+          scoreDisplay.textContent = "Score: " + score;
           break;
         }
       }
@@ -1560,7 +1561,7 @@ button {
     // Increase score over time
     if (gameActive && animationId % 5 === 0) {
       score++;
-      scoreDisplay.textContent = `Score: ${score}`;
+      scoreDisplay.textContent = "Score: " + score;
     }
     
     // Continue game loop
@@ -1722,7 +1723,7 @@ button {
     ctx.textAlign = 'center';
     ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
     ctx.font = '18px Arial';
-    ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+    ctx.fillText("Final Score: " + score, canvas.width / 2, canvas.height / 2 + 20);
     ctx.fillText('Click Start to play again', canvas.width / 2, canvas.height / 2 + 60);
   }
   
@@ -1933,7 +1934,7 @@ button {
             if (b.hits <= 0) {
               b.status = 0;
               score += (r + 1) * 10; // Higher rows worth more points
-              scoreDisplay.textContent = `Score: ${score}`;
+              scoreDisplay.textContent = "Score: " + score;
               
               // Check if level complete
               checkLevelComplete();
@@ -1974,7 +1975,7 @@ button {
     ctx.font = '24px Arial';
     ctx.fillStyle = '#0095DD';
     ctx.textAlign = 'center';
-    ctx.fillText(`Level ${level}!`, canvas.width / 2, canvas.height / 2);
+    ctx.fillText("Level " + level + "!", canvas.width / 2, canvas.height / 2);
     
     // Pause briefly before starting next level
     gameActive = false;
@@ -2022,7 +2023,7 @@ button {
         ball.dy = -Math.abs(ball.dy); // Always bounce up
       } else {
         lives--;
-        livesDisplay.textContent = `Lives: ${lives}`;
+        livesDisplay.textContent = "Lives: " + lives;
         
         if (lives === 0) {
           gameOver();
@@ -2071,8 +2072,8 @@ button {
     paddle.x = (canvas.width - paddle.width) / 2;
     
     // Update display
-    scoreDisplay.textContent = `Score: ${score}`;
-    livesDisplay.textContent = `Lives: ${lives}`;
+    scoreDisplay.textContent = "Score: " + score;
+    livesDisplay.textContent = "Lives: " + lives;
     
     // Create bricks
     createBricks();
@@ -2093,7 +2094,7 @@ button {
     ctx.textAlign = 'center';
     ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
     ctx.font = '18px Arial';
-    ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 10);
+    ctx.fillText("Final Score: " + score, canvas.width / 2, canvas.height / 2 + 10);
     ctx.fillText('Click Start to play again', canvas.width / 2, canvas.height / 2 + 40);
   }
   
@@ -2215,8 +2216,8 @@ button {
     timeLeft = 60;
     
     // Update display
-    levelDisplay.textContent = `Level: ${level}`;
-    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    levelDisplay.textContent = "Level: " + level;
+    timerDisplay.textContent = "Time: " + timeLeft + "s";
     
     // Create maze
     generateMaze();
@@ -2342,7 +2343,7 @@ button {
   // Update timer
   function updateTimer() {
     timeLeft--;
-    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    timerDisplay.textContent = "Time: " + timeLeft + "s";
     
     if (timeLeft <= 0) {
       gameOver(false);
@@ -2420,8 +2421,8 @@ button {
     }
     
     // Update display
-    levelDisplay.textContent = `Level: ${level}`;
-    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    levelDisplay.textContent = "Level: " + level;
+    timerDisplay.textContent = "Time: " + timeLeft + "s";
     
     // Generate new maze
     cellSize = Math.max(15, 25 - level); // Make maze more complex each level
@@ -2448,7 +2449,7 @@ button {
     ctx.fillText(win ? 'You Win!' : 'Game Over!', canvas.width / 2, canvas.height / 2 - 20);
     
     ctx.font = '20px Arial';
-    ctx.fillText(`Reached Level: ${level}`, canvas.width / 2, canvas.height / 2 + 20);
+    ctx.fillText("Reached Level: " + level, canvas.width / 2, canvas.height / 2 + 20);
     ctx.fillText('Click Start to play again', canvas.width / 2, canvas.height / 2 + 60);
   }
   
@@ -2555,7 +2556,7 @@ button {
   const storedHighScore = localStorage.getItem('flappyHighScore');
   if (storedHighScore) {
     highScore = parseInt(storedHighScore);
-    highScoreDisplay.textContent = \`High Score: \${highScore}\`;
+    highScoreDisplay.textContent = "High Score: " + highScore;
   }
   
   // Bird properties
@@ -2662,7 +2663,7 @@ button {
         // Check if bird passed pipe
         if (!this.position[i].passed && bird.x > this.position[i].x + this.width) {
           score++;
-          scoreDisplay.textContent = \`Score: \${score}\`;
+          scoreDisplay.textContent = "Score: " + score;
           this.position[i].passed = true;
         }
         
@@ -2794,7 +2795,7 @@ button {
     if (score > highScore) {
       highScore = score;
       localStorage.setItem('flappyHighScore', highScore);
-      highScoreDisplay.textContent = \`High Score: \${highScore}\`;
+      highScoreDisplay.textContent = "High Score: " + highScore;
     }
     
     // Stop animation
@@ -2810,7 +2811,7 @@ button {
     ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 30);
     
     ctx.font = '20px Arial';
-    ctx.fillText(\`Score: \${score}\`, canvas.width / 2, canvas.height / 2 + 10);
+    ctx.fillText("Score: " + score, canvas.width / 2, canvas.height / 2 + 10);
     ctx.fillText('Press Start to play again', canvas.width / 2, canvas.height / 2 + 50);
   }
   
@@ -2876,7 +2877,7 @@ button {
   ctx.font = '16px Arial';
   ctx.fillText('Press Space or Tap to flap', canvas.width / 2, canvas.height / 2);
   ctx.fillText('Avoid the pipes and', canvas.width / 2, canvas.height / 2 + 30);
-  ctx.fillText('don\'t hit the ground!', canvas.width / 2, canvas.height / 2 + 50);
+  ctx.fillText('don\\'t hit the ground!', canvas.width / 2, canvas.height / 2 + 50);
   ctx.fillText('Click Start to begin', canvas.width / 2, canvas.height / 2 + 80);
 });`,
     },
@@ -2885,3 +2886,4 @@ button {
     playUrl: "/play/flappy-bird",
   }
 ];
+
